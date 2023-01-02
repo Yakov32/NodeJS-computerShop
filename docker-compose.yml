@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  node:
+    stdin_open: true # docker run -i
+    tty: true 
+    image: 'node:18.12.1'
+    volumes:
+      - ./:/home/app
+    working_dir: /home/app
+    command: sh -c "npm install && npm install -g nodemon && npm start"
+    container_name: animal_blog_node
+    ports:
+      - '3001:3000'
