@@ -5,8 +5,9 @@ app = express();
 
 
 app.get('/', (req, res) => {
-    console.log('REQUEST!!')
-    res.send('aboba22834!');
+    console.log('REQUEST!!');
+    res.send('abo');
+    
 })
 
 

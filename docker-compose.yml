@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.9'
 
 services:
   node:
@@ -8,7 +8,40 @@ services:
     volumes:
       - ./:/home/app
     working_dir: /home/app
-    command: sh -c "npm install && npm install -g nodemon && npm start"
+    command: sh -c "npm install  && npm start"
     container_name: animal_blog_node
     ports:
       - '3001:3000'
+
+  postgres:
+      # Official Postgres image from DockerHub (we use the last version)
+      image: 'postgres:latest'
+      container_name: animal_blog_db
+      restart: always
+      volumes:
+        - db-data:/var/lib/postgresql/data
+      ports:
+        - '5432:5432'
+      environment:
+        - POSTGRES_USER=postgres # The PostgreSQL user (useful to connect to the database)
+        - POSTGRES_PASSWORD=1234 # The PostgreSQL password (useful to connect to the database)
+        - POSTGRES_DB=animal_blog # The PostgreSQL default database (automatically created at first launch)
+  
+  pgadmin:
+   depends_on: 
+     - postgres
+   container_name: animal_blog_pgadmin4
+   image: dpage/pgadmin4:6
+   restart: always
+   environment:
+     - PGADMIN_DEFAULT_EMAIL=admin@email.com
+     - PGADMIN_DEFAULT_PASSWORD=admin
+     - PGADMIN_LISTEN_PORT=80
+   ports:
+     - '3004:80'
+   volumes:
+     - pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  db-data:
+  pgadmin-data:
