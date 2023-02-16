@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const router = require('./routes/index');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 require('dotenv/config');
 
@@ -16,6 +17,7 @@ app.set('views', 'templates');
 //Middleware
 app.use(morgan('tiny'));
 app.use(cors());
+app.use(bodyParser.json());
 
 
 //Static
