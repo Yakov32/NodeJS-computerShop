@@ -14,8 +14,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Item.init({
-    title: DataTypes.STRING,
-    price: DataTypes.INTEGER
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        
+      }
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    imgPath: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+
   }, {
     sequelize,
     modelName: 'Item',
