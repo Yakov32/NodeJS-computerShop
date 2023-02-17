@@ -66,9 +66,9 @@
           Каталог
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">Процессоры</a></li>
-          <li><a class="dropdown-item" href="#">Видеокарты</a></li>
-          <li><a class="dropdown-item" href="#">Материнские платы</a></li>
+            <% for (let i = 0; i < categories.length; i++) {%>
+              <li><a class="dropdown-item" href=<%= 'categories/' + categories[i].id %>><%= categories[i].title %></a></li>
+            <% } %>
           </ul>
         </div>
       </div>

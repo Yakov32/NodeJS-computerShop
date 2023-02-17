@@ -14,8 +14,9 @@ exports.index = async function(req, res) {
                 exclude: ['category_id']
             }
         });
+        let categories = await Category.findAll();
 
-        res.send(items);
+        res.render('index', {items, categories});
         
     } catch (error) {
         console.log(error);
