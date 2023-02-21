@@ -20,15 +20,28 @@
           <div class="row">
             <% for (let i = 0; i < items.length; i++) {%>
               <div class="col-sm-4 mt-3">
-              <div class="card">
+              <div class="card border-primary">
                 <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp" class="card-img-top" alt="Palm Springs Road"/>
                 <div class="card-body">
                   <h5 class="card-title"><%= items[i].title %></h5>
                   <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                  <p class="card-text">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                  </p>
+
+                  <div class="btn-group shadow-0" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
+                        <a href="#"><%= items[i].price %>&#8381</a>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
+                        <a href="#"><i class="fa fa-heart-o text-danger" aria-hidden="true"></i><span class="p-1">1</span></a>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
+                        Купить
+                    </button>
+                  </div>
                 </div>
+                <div class="card-footer">
+                  <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+                
               </div>
             </div>
               
