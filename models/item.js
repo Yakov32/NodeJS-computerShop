@@ -1,7 +1,6 @@
 'use strict';
 
 const { Model } = require('sequelize');
-const Category = require('./../models/').Category;
 
 module.exports = (sequelize, DataTypes) => {
   class Item extends Model {
@@ -14,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       Item.belongsTo(models.Category, {
         foreignKey: 'category_id',
         as: 'category'
+      });
+      Item.hasMany(models.Comment, {
+        foreignKey: 'item_id',
+        as: 'comments'
       });
     }
   }
