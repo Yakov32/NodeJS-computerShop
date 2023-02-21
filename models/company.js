@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Company.init({
     title: {
-      type: sequelize.DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     }
   }, {
