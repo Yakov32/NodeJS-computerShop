@@ -251,5 +251,3 @@ module.exports = {
     await queryInterface.bulkDelete('Items', null, {});
   }
 };
-
-  
