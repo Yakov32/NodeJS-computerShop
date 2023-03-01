@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'category_id',
         as: 'category'
       });
+      Item.belongsTo(models.Company, {
+        foreignKey: 'company_id',
+        as: 'company'
+      });
       Item.hasMany(models.Comment, {
         foreignKey: 'item_id',
         as: 'comments'
