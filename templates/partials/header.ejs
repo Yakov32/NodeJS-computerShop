@@ -34,16 +34,6 @@
       <!-- Left links -->
 
       <div class="d-flex align-items-center">
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-          Каталог
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <% for (let i = 0; i < categories.length; i++) {%>
-              <li><a class="dropdown-item" href=<%= 'categories/' + categories[i].id %>><%= categories[i].title %></a></li>
-            <% } %>
-          </ul>
-        </div>
         <button type="button" class="btn btn-link px-3 me-2">
           Логин
         </button>
