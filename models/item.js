@@ -1,6 +1,7 @@
 'use strict';
 
 const { Model } = require('sequelize');
+const config = require('./../config/config');
 
 module.exports = (sequelize, DataTypes) => {
   class Item extends Model {
@@ -47,6 +48,16 @@ module.exports = (sequelize, DataTypes) => {
     imgPath: {
       type: DataTypes.STRING,
       allowNull: true,
+      get(){
+        const imgPath = this.getDataValue('imgPath');
+        const url = `${config.appUrl}:${config.port}`;
+
+        if(!imgPath) {
+          return `${url}/public/assets/images/default-item-img.webp`;
+        }
+
+        return `${url}/public/assets/images/items/${this.getDataValue('imgPath')}`;
+      }
     },
 
   }, {

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <%- include('partials/head'); %>
+  <body>
+    <div class="container py-3">
+      <%- include('partials/header'); %>
+      <main>
+        ABOBA
+        <div class="row p-5 justify-content-center">
+          <div class="col-md-8">
+            <div class="card border-primary">
+              <img src=<%= item.imgPath %> class="card-img-top" alt="Palm Springs Road"/>
+              <div class="card-body">
+                <h5 class="card-title"><%= item.title %></h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+
+                <div class="btn-group shadow-0" role="group" aria-label="Basic example">
+                  <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
+                      <a href="#"><%= item.price %>&#8381</a>
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
+                      <a href="#"><i class="fa fa-heart-o text-danger" aria-hidden="true"></i><span class="p-1">1</span></a>
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
+                      Купить
+                  </button>
+                </div>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </div>
+              
+            </div>
+          </div>
+          <div class="col-md-8">
+            <h2 class="text-center border-bottom">Комментарии</h2>
+          </div>
+          <div class="col-md-12">
+            <div class="row d-flex justify-content-center">
+              <div class="col-md-8 col-lg-6">
+                <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+                  <div class="card-body p-4">
+                    
+                    
+                    <% for (i = 0,comments = item.comments; i < item.comments.length; i++) {%>
+                      <div class="card mb-4">
+                        <div class="card-body">
+                          <p><%= comments[i].text %></p>
+              
+                          <div class="d-flex justify-content-between">
+                            <div class="d-flex flex-row align-items-center">
+                              <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25"
+                                height="25" />
+                              <p class="small mb-0 ms-2"><%= comments[i].user.email %></p>
+                            </div>
+                            <div class="d-flex flex-row align-items-center">
+                              <p class="small text-muted mb-0">Upvote?</p>
+                              <i class="far fa-thumbs-up mx-2 fa-xs text-black" style="margin-top: -0.16rem;"></i>
+                              <p class="small text-muted mb-0">3</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <% } %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+          
+    
+      </main>
+      <!-- Footer -->
+      <%- include('partials/footer'); %>
+    </div>
+    <!-- SCRIPTS -->
+    
+
+  </body>
+</html>

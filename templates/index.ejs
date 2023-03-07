@@ -82,9 +82,9 @@
             <% for (let i = 0; i < items.length; i++) {%>
               <div class="col-sm-4 mt-3">
               <div class="card border-primary">
-                <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp" class="card-img-top" alt="Palm Springs Road"/>
+                <img src=<%= items[i].imgPath %> class="card-img-top" alt="Palm Springs Road"/>
                 <div class="card-body">
-                  <h5 class="card-title"><%= items[i].title %></h5>
+                  <a href=<%= `/items/${items[i].id}` %>><h5 class="card-title"><%= items[i].title %></h5></a>
                   <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
 
                   <div class="btn-group shadow-0" role="group" aria-label="Basic example">
