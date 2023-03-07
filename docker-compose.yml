@@ -11,7 +11,7 @@ services:
     # command: sh -c "npm install  && npm start"
     container_name: animal_blog_node
     ports:
-      - '3001:3000'
+      - '3001:3001'
 
   postgres:
       # Official Postgres image from DockerHub (we use the last version)
