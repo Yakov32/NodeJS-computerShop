@@ -1,6 +1,8 @@
 'use strict';
 
 const Item = require('./../models/').Item;
+const Comment = require('./../models').Comment;
+const User = require('./../models').User;
 const sequelize = require('sequelize');
 
 exports.items = async function(req, res) {
@@ -18,10 +20,15 @@ exports.items = async function(req, res) {
 
 exports.item = async function(req, res) {
     try {
-
-        let item = await Item.findByPk(req.params.id);
-        //sconsole.log('ITEM ------ ', item);
-        res.send(item);
+        const item = await Item.findByPk(req.params.id, {
+            include: { model: Comment, as: 'comments', 
+                include: {
+                model: User, as: 'user'
+                }
+            },
+        });
+        console.log('ITEM ------ ', item);
+        res.render('itemPage' , {item});
     } catch (error) {
         console.log(error);
     }
