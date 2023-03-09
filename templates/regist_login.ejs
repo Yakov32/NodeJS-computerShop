@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <%- include('partials/head'); %>
+  <body>
+    <div class="container py-3">
+      <%- include('partials/header'); %>
+      <!-- Pills navs -->
+      <main>
+        <div class="row justify-content-center p-3">
+            <div class="col-md-6">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="<%= (auth && !reg) ? "nav-link active" : "nav-link"%>" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Логин</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="<%= (reg && !auth) ? "nav-link active" : "nav-link"%>" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Регистрация</button>
+                    </li>
+                    
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="<%= (auth) ? "tab-pane fade show active" : "tab-pane fade"%>" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <form action="/auth" method="post">
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                              <input type="email" required id="form2Example1" class="form-control" />
+                              <label class="form-label" for="form2Example1">Почта</label>
+                            </div>
+                          
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                              <input type="password"  id="form2Example2" class="form-control" required minlength="6"/>
+                              <label class="form-label" for="form2Example2">Пароль</label>
+                            </div>
+                          
+                            <!-- 2 column grid layout for inline styling -->
+                            
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-block mb-4">Войти</button>
+                          
+                            <!-- Register buttons -->
+                            <!-- <div class="text-center">
+                              <p>Not a member? <a href="#!">Register</a></p>
+                              <p>or sign up with:</p>
+                              <button type="button" class="btn btn-link btn-floating mx-1">
+                                <i class="fab fa-facebook-f"></i>
+                              </button>
+                          
+                              <button type="button" class="btn btn-link btn-floating mx-1">
+                                <i class="fab fa-google"></i>
+                              </button>
+                          
+                              <button type="button" class="btn btn-link btn-floating mx-1">
+                                <i class="fab fa-twitter"></i>
+                              </button>
+                          
+                              <button type="button" class="btn btn-link btn-floating mx-1">
+                                <i class="fab fa-github"></i>
+                              </button>
+                            </div> -->
+                        </form>
+                    </div>
+                    <div class="<%= (reg) ? "tab-pane fade show active" : "tab-pane fade"%>" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                      <form action="/regist" method="post">
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                          <input name="user_email" type="email" id="form2Example1" class="form-control" required />
+                          <label class="form-label" for="form2Example1">Почта</label>
+                        </div>
+                      
+                        <!-- Password input -->
+                        <div class="form-outline mb-4">
+                          <input name="user_password" type="password" id="form2Example2" class="form-control" required minlength="6" />
+                          <label class="form-label" for="form2Example2">Пароль</label>
+                        </div>
+                      
+                        <!-- 2 column grid layout for inline styling -->
+                        
+                      
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary btn-block mb-4 ">Зарегистрироваться</button>
+                      
+                        <!-- Register buttons -->
+                        
+                      </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+          
+      </main>
+
+      <%- include('partials/footer'); %>
+  </body>
+</html>
