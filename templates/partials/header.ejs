@@ -50,4 +50,13 @@
   </div>
   </nav>
     
-  </header>
+</header>
+
+<% if (locals.alerts && typeof(locals.alerts)){ %>
+  <% for(let i = 0; i < alerts.length; i++) { %>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <p class="font-weight-bold" ><%= alerts[i] %></p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <% } %>
+<% } %>
