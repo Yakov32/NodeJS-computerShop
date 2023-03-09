@@ -8,8 +8,7 @@ const config = require('./config/config');
 
 require('dotenv/config');
 
-
-app = express();
+const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', 'templates');
@@ -18,7 +17,9 @@ app.set('views', 'templates');
 //Middleware
 app.use(morgan('tiny'));
 app.use(cors());
-app.use(bodyParser.json());
+app.options('*', cors());
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({extended: true}));
 
 //Static
 //This made in order to fix loading styles in templates
@@ -30,8 +31,3 @@ app.use(router);
 app.listen(config.port, () => {
     console.log('server hass started');
 })
-
-// app.get('/test', (req, res) => {
-//     res.send('test');
-//     console.log(process.env.PORT);
-// })
