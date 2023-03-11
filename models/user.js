@@ -26,11 +26,27 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: true,
+        isEmail: {
+          args: true,
+          msg: 'Некорректный формат почты!',
+        },
+      },
     },
 
     password: {
-    type: DataTypes.STRING,
-    allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: true,
+        len: {
+          args: [10, 100],
+          msg: 'Неправильный пароль. Пароль должен быть > 6 и < 100'
+        }
+      }
     },
 
     imgPath: {

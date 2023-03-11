@@ -25,7 +25,7 @@ exports.registrate = async function(req, res) {
             return;
         }
         
-        let user = await User.create({email: req.body.user_email, password: req.body.user_password});
+        let user =  await User.create({email: req.body.user_email, password: req.body.user_password});
 
         if(!user) {
             res.render('regist_login', { reg: false, auth: true, alerts: [
@@ -38,8 +38,11 @@ exports.registrate = async function(req, res) {
             'Пользователь зарегестрирован! Авторизуйтесь'
         ]});
     } catch (error) {
-        res.send(`ERROR ------ ${error}`);
-        console.log('ERROR ------ ', error);
+        res.render('regist_login', {
+            reg: true, auth: false, alerts: [
+                error.message,
+            ]
+        })
+        console.log('ERROR ------ ', error.message);
     }
-    
 }   
