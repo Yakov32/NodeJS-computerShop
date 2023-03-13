@@ -6,7 +6,8 @@ exports.validate = (req, res, next) => {
     
     const errors = validationResult(req);
 
-    if(errors) {
+    if(!errors.isEmpty()) {
+        console.log('express-validator errors ---- ', errors);
         req.errorRender = true;
         req.errorsToRender = errors;
         return next();

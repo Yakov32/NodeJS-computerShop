@@ -4,7 +4,7 @@ const {body} = require('express-validator');
 
 exports.rules = () => {
     return [
-        body('email').isEmail().withMessage('Некорректная почта'),
-        body('password').isLength({min: 6}).withMessage('Пароль должен быть >= 8'),
+        body('user_email').isEmail().withMessage('Некорректная почта'),
+        body('user_password').isLength({min: 6}).withMessage('Пароль должен быть >= 6'),
     ];
 }
