@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
         notNull: true,
         notEmpty: true,
         len: {
-          args: [10, 100],
+          args: [6, 100],
           msg: 'Неправильный пароль. Пароль должен быть > 6 и < 100'
         }
       }
