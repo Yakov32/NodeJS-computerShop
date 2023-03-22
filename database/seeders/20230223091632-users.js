@@ -9,14 +9,17 @@ module.exports = {
     {
       email: 'user1@gmail.com',
       password: bcrypt.hashSync('123', 10),
+      isAdmin: false,
     },
     {
       email: 'user2@gmail.com',
       password: bcrypt.hashSync('1234', 10),
+      isAdmin: false,
     },
     {
       email: 'user3@gmail.com',
       password: bcrypt.hashSync('12345', 10),
+      isAdmin: false,
     },
     {
       email: 'admin@gmail.com',
