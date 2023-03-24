@@ -17,7 +17,7 @@ const strategy = new LocalStrategy(
         //Made to avoid cluster of the sasme messages
         req.session.messages = [];
         
-        User.findOne({raw: true, where: {email: email}}).then((user) => {
+        User.findOne({where: {email: email}}).then((user) => {
             if(!user) {
                 return cb(null, false, {message: 'Пользователя с такой почтой не существует.'})
             }
