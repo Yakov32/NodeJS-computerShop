@@ -9,6 +9,7 @@ exports.index = async function(req, res) {
 
     try {
         
+        console.log('REQ USER -----, ', req.user);
         console.log('REQ query ----------  ', req.query);
         console.log('tooo number -------', typeof +req.query.priceFrom);
 
@@ -76,8 +77,7 @@ exports.index = async function(req, res) {
             //limit: 30 
         });
         
-        
-        res.render('index', {items, categories, companies});
+        res.render('index', {items, categories, companies, user: req.user});
         
     } catch (error) {
         console.log('SEARCH CONTROLLER ERROR ------ ', error);

@@ -28,7 +28,8 @@ exports.item = async function(req, res) {
             },
         });
         console.log('ITEM ------ ', item);
-        res.render('itemPage' , {item});
+        
+        res.render('itemPage' , {item, user: req.user});
     } catch (error) {
         console.log(error);
     }
