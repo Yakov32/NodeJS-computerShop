@@ -1,7 +1,7 @@
 'use strict';
 
 const router = require('express').Router();
-const {sendForm, auth} = require('../controllers/AuthController');
+const {sendForm, auth, logout} = require('../controllers/AuthController');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./../models').User;
@@ -52,5 +52,7 @@ passport.deserializeUser(function (user, cb){
 });
 
 router.post('/', passport.authenticate('local', {failureRedirect: '/auth', failureMessage: true}), auth);
+
+router.get('/logout', logout);
 
 module.exports = router;
