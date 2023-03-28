@@ -35,6 +35,13 @@ app.use(passport.authenticate('session'));
 
 app.use(router);
 
+app.use(function (err, req, res, next) {
+   if(err.message) 
+        return res.send(' Error   ---  ' + err.message);
+    
+    res.send(' App error Something went wrong');
+});
+
 app.listen(config.port, () => {
     console.log('server has started');
 })
