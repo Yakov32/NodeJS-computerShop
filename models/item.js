@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
           return `${url}/public/assets/images/default-item-img.webp`;
         }
 
-        return `${url}/public/assets/images/items/${this.getDataValue('imgPath')}`;
+        return `${url}/public/uploads/items/${this.getDataValue('imgPath')}`;
       }
     },
 

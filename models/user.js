@@ -61,7 +61,7 @@ module.exports = (sequelize, DataTypes) => {
           return `${url}/public/assets/images/default-user-img.png`;
         }
 
-        return `${url}/public/assets/images/items/${this.getDataValue('imgPath')}`;
+        return `${url}/public/uploads/users/${this.getDataValue('imgPath')}`;
       }
     },
     isAdmin: {
