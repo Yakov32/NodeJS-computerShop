@@ -23,7 +23,7 @@ module.exports = {
     },
     {
       email: 'admin@gmail.com',
-      password: bcrypt.hashSync('admin', 10),
+      password: bcrypt.hashSync('admin123', 10),
       isAdmin: true,
     },
    ])
