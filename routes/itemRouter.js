@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const {items, item, itemCreate, itemCreateForm} = require('./../controllers/itemController');
+const {item, itemCreate, itemCreateForm} = require('./../controllers/itemController');
 
 const rules = require('./../validators/item/rules');
 const itemErrorRender = require('./../validators/item/errorRender');
@@ -43,5 +43,5 @@ const uploadOptions = multer({storage: storage});
 
 router.post('/create', uploadOptions.single('image'), [rules(), validate, itemErrorRender], itemCreate);
 
-//router.get('/', items)
+
 module.exports = router;
