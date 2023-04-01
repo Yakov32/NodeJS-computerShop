@@ -32,6 +32,25 @@
               
             </div>
           </div>
+          <div class="col-md-6 text-center">
+              <div class="text-danger">
+                <form class="row g-3 bor" action="/comments/create" method="post">
+                  <div class="col-md-12">
+                    <h4 class="text-center"> Добавить комментарий</h4>
+                  </div>
+                  <div class="col-md-12 justify-content-center">
+                    <input  name="commentText" type="text"  placeholder="..." class="form-control" id="inputItemName" required>
+                  </div> 
+                  <input name="commentUserId" type="text"  value=<%=user.id%> placeholder="..." class="form-control" hidden>
+                  <input name="commentItemId" type="text" value=<%=item.id%>  placeholder="..." class="form-control" hidden>
+                  <div class="col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                  </div>
+                </form>
+              </div>
+                
+              
+          </div>
           <div class="col-md-8">
             <h2 class="text-center border-bottom">Комментарии</h2>
           </div>
@@ -54,9 +73,8 @@
                               <p class="small mb-0 ms-2"><%= comments[i].user.email %></p>
                             </div>
                             <div class="d-flex flex-row align-items-center">
-                              <p class="small text-muted mb-0">Upvote?</p>
-                              <i class="far fa-thumbs-up mx-2 fa-xs text-black" style="margin-top: -0.16rem;"></i>
-                              <p class="small text-muted mb-0">3</p>
+                              <p class="small text-muted mb-0 me-1"><span class="fa fa-clock-o fa-1x text-primary"></span></p>
+                              <p class="small text-muted mb-0"><%= moment(comments[i].createdAt).format('LLLL')%></p>
                             </div>
                           </div>
                         </div>

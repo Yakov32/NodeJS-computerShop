@@ -5,7 +5,7 @@ const Comment = require('./../models').Comment;
 const User = require('./../models').User;
 const Company = require('./../models').Company;
 const Category = require('./../models').Category;
-
+const moment = require('moment');moment.locale('ru');
 
 exports.items = async function(req, res) {
 
@@ -31,7 +31,7 @@ exports.item = async function(req, res) {
         });
         console.log('ITEM ------ ', item);
         
-        res.render('itemPage' , {item, user: req.user});
+        res.render('itemPage' , {item, user: req.user, moment});
     } catch (error) {
         console.log(error);
     }
