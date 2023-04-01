@@ -34,3 +34,13 @@ ul.ddropdownn .ddropdownn-inside {/* Цвет фона. */ background: #ffffff; 
 ul.ddropdownn .ddropdownn-inside a:hover {/* Цвет фона изменится при наведении. */ background: #efefef; }
 
 
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #fbc2eb;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgb(253, 244, 190), rgb(93, 153, 255));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgb(255, 235, 123), rgb(245, 193, 7))
+}
