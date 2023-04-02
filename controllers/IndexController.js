@@ -4,6 +4,7 @@ const Item = require('./../models/').Item;
 const Category = require('./../models/').Category;
 const Company = require('./../models/').Company;
 const { Op } = require('sequelize');
+const moment = require('moment');moment.locale('ru');
 
 exports.index = async function(req, res) {
 
@@ -77,7 +78,7 @@ exports.index = async function(req, res) {
             //limit: 30 
         });
         
-        res.render('index', {items, categories, companies, user: req.user});
+        res.render('index', {items, categories, companies, user: req.user, moment});
         
     } catch (error) {
         console.log('SEARCH CONTROLLER ERROR ------ ', error);
