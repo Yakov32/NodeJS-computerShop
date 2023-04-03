@@ -88,15 +88,11 @@
                   <p class="card-text p-1 text-secondary">This card has supporting text below as a natural lead-in to additional content.</p>
 
                   <div class="btn-group shadow-0" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
-                        <a href="#" class="text-decoration-none text-dark"><%= items[i].price %><span class="text-dark ms-1">&#8381</span></a>
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
-                        <a href="#" class="text-decoration-none"><i class="fa fa-heart-o text-danger" aria-hidden="true"></i><span class="p-1">1</span></a>
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
+                      <p class="text-decoration-none p-2 m-0 bg-light border border-dark"><%= items[i].price %><span class="text-dark ms-1">&#8381</span></p>
+                      <a  href="#" class="like-item text-decoration-none p-2 bg-light border border-dark"><p hidden class="itemHiddenId"><%=items[i].id%></p><i class="fa fa-heart-o text-danger" aria-hidden="true"></i><span class="p-1 like-count text-danger"><%= items[i].likes.length %></span></a>
+                    <!-- <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
                         Купить
-                    </button>
+                    </button> -->
                   </div>
                 </div>
                 <div class="card-footer">
@@ -119,7 +115,7 @@
       <%- include('partials/footer'); %>
     </div>
     <!-- SCRIPTS -->
-    
+    <script src="./../public/assets/script.js"></script>
 
   </body>
 </html>

@@ -3,6 +3,7 @@
 const Item = require('./../models/').Item;
 const Category = require('./../models/').Category;
 const Company = require('./../models/').Company;
+const Like = require('./../models').Like;
 const { Op } = require('sequelize');
 const moment = require('moment');moment.locale('ru');
 
@@ -36,7 +37,7 @@ exports.index = async function(req, res) {
     
         let items = await Item.findAll({
             //attributes: ['title', 'price'],
-            include: [ {model: Category, as: 'category'}, {model: Company, as: 'company'}],
+            include: [ {model: Category, as: 'category'}, {model: Company, as: 'company'}, {model: Like, as: 'likes'}],
             where: {
                 [Op.and] : [
                     {
