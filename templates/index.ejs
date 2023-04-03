@@ -103,19 +103,15 @@
             </div>
               
             <% } %>
-            
-            
-
           </div>
-          
       </main>
-    
-      
       <!-- Footer -->
       <%- include('partials/footer'); %>
     </div>
     <!-- SCRIPTS -->
-    <script src="./../public/assets/script.js"></script>
-
+    <script type="module">
+      import {allItemsAddLikeEvent} from './../public/assets/script.js'
+      allItemsAddLikeEvent();
+    </script>
   </body>
 </html>

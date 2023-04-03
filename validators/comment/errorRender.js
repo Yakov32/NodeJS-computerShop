@@ -3,6 +3,8 @@
 const Item = require('./../../models').Item;
 const User = require('./../../models').User;
 const Comment = require('./../../models').Comment;
+const Like = require('./../../models/').Like;
+const moment = require('moment');moment.locale('ru');
 
 module.exports = async (req, res, next) => {
     
@@ -12,11 +14,17 @@ module.exports = async (req, res, next) => {
             return res.send('Ошибка. Нету id обьекта комментария');
         }
         const item = await Item.findByPk(req.body.commentItemId, {
-            include: { model: Comment, as: 'comments', 
-                include: {
-                model: User, as: 'user'
+            include: [ 
+                {
+                    model: Comment, as: 'comments', 
+                        include: {
+                            model: User, as: 'user'
+                        }
+                },
+                {
+                    model: Like, as: 'likes', 
                 }
-            },
+            ],
         });
         if (!item) {
             return res.send('Ошибка. Нету обьекта комментария');
@@ -28,6 +36,7 @@ module.exports = async (req, res, next) => {
                 alerts: req.errorsToRender.array().map(e => e.msg),
                 user: req.user,
                 item,
+                moment
             }
         );
     }

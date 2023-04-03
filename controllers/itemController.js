@@ -2,6 +2,7 @@
 
 const Item = require('./../models/').Item;
 const Comment = require('./../models').Comment;
+const Like = require('./../models/').Like;
 const User = require('./../models').User;
 const Company = require('./../models').Company;
 const Category = require('./../models').Category;
@@ -23,11 +24,17 @@ exports.items = async function(req, res) {
 exports.item = async function(req, res) {
     try {
         const item = await Item.findByPk(req.params.id, {
-            include: { model: Comment, as: 'comments', 
-                include: {
-                model: User, as: 'user'
+            include: [ 
+                {
+                    model: Comment, as: 'comments', 
+                        include: {
+                            model: User, as: 'user'
+                        }
+                },
+                {
+                    model: Like, as: 'likes', 
                 }
-            },
+            ],
         });
         console.log('ITEM ------ ', item);
         

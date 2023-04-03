@@ -2,32 +2,28 @@
 <html lang="en">
   <%- include('partials/head'); %>
   <body>
-    <div class="container py-3">
+    <div class="container py-3 bg-light">
       <%- include('partials/header'); %>
       <main>
         ABOBA
         <div class="row p-5 justify-content-center">
           <div class="col-md-8">
-            <div class="card border-primary">
-              <img src=<%= item.imgPath %> class="card-img-top" alt="Palm Springs Road"/>
+            <div class="card border-dark">
+              <img src=<%= item.imgPath %> height="500px" class="card-img-top" alt="Item's image"/>
               <div class="card-body">
-                <h5 class="card-title"><%= item.title %></h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <a class=" fs-5 text-dark bg-light" href=<%= `/items/get/${item.id}` %>><%= item.title %></a>
+                <p class="card-text p-1 text-secondary">This card has supporting text below as a natural lead-in to additional content.</p>
 
                 <div class="btn-group shadow-0" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
-                      <a href="#"><%= item.price %>&#8381</a>
-                  </button>
-                  <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
-                      <a href="#"><i class="fa fa-heart-o text-danger" aria-hidden="true"></i><span class="p-1">1</span></a>
-                  </button>
-                  <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
+                    <p class="text-decoration-none p-2 m-0 bg-light border border-dark"><%= item.price %><span class="text-dark ms-1">&#8381</span></p>
+                    <a  href="#" class="like-item text-decoration-none p-2 bg-light border border-dark"><p hidden class="itemHiddenId"><%=item.id%></p><i class="fa fa-heart-o text-danger" aria-hidden="true"></i><span class="p-1 like-count text-danger"><%= item.likes.length %></span></a>
+                  <!-- <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
                       Купить
-                  </button>
+                  </button> -->
                 </div>
               </div>
               <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
+                <small class="text-muted"><i class="fa fa-clock-o text-dark"></i> <%= moment(item.createdAt).format('LLLL')%></small>
               </div>
               
             </div>
@@ -94,6 +90,10 @@
       <%- include('partials/footer'); %>
     </div>
     <!-- SCRIPTS -->
+    <script type="module">
+      import {itemAddLikeEvent} from '/public/assets/script.js'
+      itemAddLikeEvent();
+    </script>
     
 
   </body>
