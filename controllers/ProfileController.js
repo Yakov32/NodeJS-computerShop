@@ -1,15 +1,18 @@
 'use strict';
 
 const User = require('./../models').User;
+const Comment = require('./../models').Comment;
+const Like = require('./../models').Like;
 
 exports.getProfile = async function(req, res) {
-    
+
+   const fullUser = await User.findByPk(req.user.id, {include: [{model: Comment, as: 'comments'}, {model: Like, as: 'likes'}]});
+   req.user.comments = fullUser.comments;
+   req.user.likes = fullUser.likes;
+
+   console.log(req.user);
    res.render('profile/userProfile', {user: req.user});
 }
-
-// exports.changeAvatar = async function(req, res) {
-//     res.render('profile/changeAvatar', {user: req.user});
-// }
 
 exports.changeAvatar = async function(req, res) {
     
