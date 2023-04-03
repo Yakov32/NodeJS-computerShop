@@ -26,7 +26,7 @@ module.exports =  () => {
         body('commentItemId').notEmpty().withMessage('Ошибка. Обьект комментария не получен')
             .custom(async function(itemId) {
                 try {
-                    const item = await User.findByPk(itemId);
+                    const item = await Item.findByPk(itemId);
                     if(!item) {
                         return Promise.reject();
                     }
