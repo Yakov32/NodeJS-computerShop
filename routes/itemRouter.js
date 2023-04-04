@@ -6,11 +6,7 @@ const rules = require('./../validators/item/rules');
 const itemErrorRender = require('./../validators/item/errorRender');
 const {validate} = require('./../validators');
 const multer = require('multer');
-
-
-router.get('/get/:id', item);
-router.get('/create', itemCreateForm);
-
+const {checkUser, checkAdmin} = require('./../middleware/authorization');
 
 const FILE_TYPE_MAP = {
     'image/png' : 'png',
@@ -41,7 +37,11 @@ const storage = multer.diskStorage({
 
 const uploadOptions = multer({storage: storage});
 
-router.post('/create', uploadOptions.single('image'), [rules(), validate, itemErrorRender], itemCreate);
 
+router.get('/get/:id', item);
+
+router.get('/create', checkAdmin, itemCreateForm);
+
+router.post('/create', checkAdmin, uploadOptions.single('image'), [rules(), validate, itemErrorRender], itemCreate);
 
 module.exports = router;

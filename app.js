@@ -7,6 +7,7 @@ const config = require('./config/config');
 const session = require('express-session');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
 }));
+app.use(flash());
 app.use(passport.authenticate('session'));
 
 app.use(router);
