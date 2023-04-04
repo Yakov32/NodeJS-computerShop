@@ -6,9 +6,10 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./../models').User;
 const bcrypt = require('bcrypt');
+const {checkUser, alreadyAuthorized} = require('./../middleware/authorization');
 
 
-router.get('/', sendForm);
+router.get('/', alreadyAuthorized, sendForm);
 
 
 const strategy = new LocalStrategy(
@@ -51,8 +52,8 @@ passport.deserializeUser(function (user, cb){
     })
 });
 
-router.post('/', passport.authenticate('local', {failureRedirect: '/auth', failureMessage: true}), auth);
+router.post('/', alreadyAuthorized, passport.authenticate('local', {failureRedirect: '/auth', failureMessage: true}), auth);
 
-router.get('/logout', logout);
+router.get('/logout', checkUser, logout);
 
 module.exports = router;

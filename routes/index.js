@@ -14,7 +14,7 @@ router.get('/', checkUser, index);
 
 router.use('/items', checkUser, itemRouter);
 router.use('/regist', alreadyAuthorized, registRouter);
-router.use('/auth', alreadyAuthorized, authRouter);
+router.use('/auth', authRouter);
 router.use('/profile', profileRouter);
 router.use('/comments', checkUser, commentRouter);
 router.use('/likes', likeRouter);

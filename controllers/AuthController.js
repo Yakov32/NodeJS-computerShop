@@ -15,10 +15,9 @@ exports.auth = async function(req, res) {
 
 exports.logout = function (req, res, next) {
     req.logout(function(err) {
-        
         if (err) { 
-            next(err); 
+            return next(err); 
         }
-        res.redirect('/');
+        return res.redirect('/auth');
     })
 }
