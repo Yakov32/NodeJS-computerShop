@@ -1,7 +1,11 @@
 'use strict';
 
 exports.sendForm = async function(req, res) {
-    res.render('regist_login', {auth: true, reg: false, alerts: (req.session.messages ? req.session.messages : [])});    
+    let alerts = [];
+    alerts = alerts.concat(req.flash('error'));
+    alerts = alerts.concat(req.flash('success'));
+    alerts = alerts.concat(req.session.messages ? req.session.messages : [])
+    res.render('regist_login', {auth: true, reg: false, alerts});    
 }
 
 exports.auth = async function(req, res) {

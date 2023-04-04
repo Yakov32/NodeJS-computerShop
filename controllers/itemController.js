@@ -36,9 +36,11 @@ exports.item = async function(req, res) {
                 }
             ],
         });
-        console.log('ITEM ------ ', item);
-        
-        res.render('itemPage' , {item, user: req.user, moment});
+
+        let alerts = [];
+        alerts = alerts.concat(req.flash('error'));
+        alerts = alerts.concat(req.flash('success'));
+        res.render('itemPage' , {item, user: req.user, moment, alerts});
     } catch (error) {
         console.log(error);
     }

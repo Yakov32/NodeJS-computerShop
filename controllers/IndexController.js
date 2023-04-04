@@ -79,7 +79,11 @@ exports.index = async function(req, res) {
             //limit: 30 
         });
         
-        res.render('index', {items, categories, companies, user: req.user, moment});
+        let alerts = [];
+        alerts = alerts.concat(req.flash('error'));
+        alerts = alerts.concat(req.flash('success'));
+
+        res.render('index', {items, categories, companies, user: req.user, moment, alerts});
         
     } catch (error) {
         console.log('SEARCH CONTROLLER ERROR ------ ', error);
