@@ -1,12 +1,13 @@
 'use strict';
 
 const User = require('../models').User;
-const sequelize = require('sequelize');
 
 exports.sendForm = async function(req, res) {
-
-    res.render('regist_login', {reg: true, auth: false});
-    
+    let alerts = [];
+    alerts = alerts.concat(req.flash('error'));
+    alerts = alerts.concat(req.flash('success'));
+    alerts = alerts.concat(req.session.messages ? req.session.messages : [])
+    res.render('regist_login', {reg: true, auth: false, alerts}); 
 }
 
 exports.registrate = async function(req, res) {

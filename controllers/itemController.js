@@ -79,13 +79,15 @@ exports.itemCreate = async function(req, res) {
 }
 
 exports.itemCreateForm = async function(req, res) {
-    try {
-        
+    try {  
         const categories = await Category.findAll();
         const companies  = await Company.findAll();
 
-        res.render('itemCreate', {user: req.user, categories, companies});
-        
+        let alerts = [];
+        alerts = alerts.concat(req.flash('error'));
+        alerts = alerts.concat(req.flash('success'));
+
+        res.render('itemCreate', {user: req.user, categories, companies, alerts});
     } catch (error) {
         console.log('error ----', error);
     }   

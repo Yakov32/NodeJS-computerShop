@@ -8,11 +8,11 @@ exports.validate = (req, res, next) => {
 
     if(!errors.isEmpty()) {
         console.log('express-validator errors ---- ', errors);
+        errors.array().map(e => {
+            req.flash('error', e.msg);
+        });
         req.errorRender = true;
-        req.errorsToRender = errors;
         return next();
     }
-
-    console.log('asdas2311')
-    next();
+    return next();
 }

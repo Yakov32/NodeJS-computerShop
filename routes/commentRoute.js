@@ -3,10 +3,9 @@
 const router = require('express').Router();
 const {create} = require('./../controllers/CommentController');
 const rules = require('./../validators/comment/rules');
-const errorRender = require('./../validators/comment/errorRender');
+const errorHandler = require('./../validators/comment/errorHandler');
 const {validate} = require('./../validators');
 
-
-router.post('/create', [rules(), validate, errorRender], create)
+router.post('/create', [rules(), validate, errorHandler], create)
 
 module.exports = router;

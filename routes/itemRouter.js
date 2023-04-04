@@ -3,7 +3,7 @@ const router = require('express').Router();
 const {item, itemCreate, itemCreateForm} = require('./../controllers/itemController');
 
 const rules = require('./../validators/item/rules');
-const itemErrorRender = require('./../validators/item/errorRender');
+const errorHandler = require('../validators/item/errorHandler');
 const {validate} = require('./../validators');
 const multer = require('multer');
 const {checkUser, checkAdmin} = require('./../middleware/authorization');
@@ -42,6 +42,6 @@ router.get('/get/:id', item);
 
 router.get('/create', checkAdmin, itemCreateForm);
 
-router.post('/create', checkAdmin, uploadOptions.single('image'), [rules(), validate, itemErrorRender], itemCreate);
+router.post('/create', checkAdmin, uploadOptions.single('image'), [rules(), validate, errorHandler], itemCreate);
 
 module.exports = router;
