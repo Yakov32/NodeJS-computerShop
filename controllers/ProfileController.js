@@ -3,15 +3,22 @@
 const User = require('./../models').User;
 const Comment = require('./../models').Comment;
 const Like = require('./../models').Like;
+const Item = require('./../models').Item;
+const moment = require('moment');moment.locale('ru');
 
 exports.getProfile = async function(req, res) {
 
-   const fullUser = await User.findByPk(req.user.id, {include: [{model: Comment, as: 'comments'}, {model: Like, as: 'likes'}]});
+   const fullUser = await User.findByPk(req.user.id, {include: [
+        {model: Comment, as: 'comments'}, 
+        {model: Like, as: 'likes', include: {
+            model: Item, as: 'item'
+        }}
+    ]});
    req.user.comments = fullUser.comments;
    req.user.likes = fullUser.likes;
 
    console.log(req.user);
-   res.render('profile/userProfile', {user: req.user});
+   res.render('profile/userProfile', {user: req.user, moment});
 }
 
 exports.changeAvatar = async function(req, res) {
