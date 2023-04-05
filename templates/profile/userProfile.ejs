@@ -20,6 +20,11 @@
                           style="z-index: 1; margin-top: 10px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
                           <p class="mb-0" style="color:rgb(246, 135, 56)"> Сменить аватар</p>
                         </button>
+                        <% if(user.isAdmin) { %>
+                          <a href="/items/create" class="btn btn-outline-dark my-2" data-mdb-ripple-color="dark" style="z-index: 1; margin-top: 10px;">
+                            <p class="mb-0" style="color:rgb(246, 135, 56)"> Добавить товар</p>
+                          </a>
+                        <% } %>
                         <div class="modal fade text-black" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog">
                             <div class="modal-content">
@@ -73,28 +78,36 @@
                         </div>
                       </div>
                       <div class="d-flex justify-content-between align-items-center mb-4">
-                        <p class="lead fw-normal mb-0">Recent photos</p>
-                        <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
+                        <p class="lead fw-normal mb-0">Избранное</p>
+                        <!--<p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>-->
                       </div>
-                      <div class="row g-2">
-                        <div class="col mb-2">
-                          <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
-                            alt="image 1" class="w-100 rounded-3">
-                        </div>
-                        <div class="col mb-2">
-                          <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
-                            alt="image 1" class="w-100 rounded-3">
-                        </div>
+                      <div class="row border-top border-dark pt-2">
+                        <% for(let i =0; i < user.likes.length; i++) { %>
+                          <div class="col-6">
+                            <div class="card border-dark mb-2">
+                              <img src=<%= user.likes[i].item.imgPath %> height="200px" class="card-img-top" alt="Item's image"/>
+                              <div class="card-body">
+                                <a class=" fs-5 text-dark bg-light" href=<%= `/items/get/${user.likes[i].item.id}` %>><%= user.likes[i].item.title %></a>
+                                <p class="card-text p-1 text-secondary">This card has supporting text below as a natural lead-in to additional content.</p>
+              
+                                <div class="btn-group shadow-0" role="group" aria-label="Basic example">
+                                    <p class="text-decoration-none p-2 m-0 bg-light border border-dark"><%= user.likes[i].item.price %><span class="text-dark ms-1">&#8381</span></p>
+                                    
+                                  <!-- <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
+                                      Купить
+                                  </button> -->
+                                </div>
+                              </div>
+                              <div class="card-footer">
+                                <small class="text-muted"><i class="fa fa-clock-o text-dark"></i> <%= moment(user.likes[i].item.createdAt).format('LLLL')%></small>
+                              </div>
+                              
+                            </div>
+                          </div>
+                          
+                        <% } %>
                       </div>
-                      <div class="row g-2">
-                        <div class="col">
-                          <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
-                            alt="image 1" class="w-100 rounded-3">
-                        </div>
-                        <div class="col">
-                          <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
-                            alt="image 1" class="w-100 rounded-3">
-                        </div>
+                       
                       </div>
                     </div>
                   </div>
