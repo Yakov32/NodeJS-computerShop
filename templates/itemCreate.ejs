@@ -26,7 +26,7 @@
                       <label for="select-categories" class="form-label select-sort me-3">Категория</label>
                       <select name="category" class="form-select select-sort" id="select-categories">
                         <%  for(let i = 0; i < categories.length; i++) { %>
-                          <option value=<%= categories[i].title %>><%= categories[i].title %></option>
+                          <option value="<%= categories[i].title %>"><%= categories[i].title %></option>
                         <% } %>
                         <option value="Неправильная категория"> Неправильная категория(Тест)</option>
                       </select>
@@ -35,7 +35,7 @@
                         <label for="select-companies" class="form-label select-sort me-3">Компания</label>
                         <select name="company" class="form-select select-sort" id="select-companies">
                           <%  for(let i = 0; i < companies.length; i++) { %>
-                            <option value=<%= companies[i].title %>><%= companies[i].title %></option>
+                            <option value="<%= companies[i].title %>"><%= companies[i].title %></option>
                           <% } %>
                           <option value="Неправильная компания"> Неправильная компания(Тест)</option>
                         </select>

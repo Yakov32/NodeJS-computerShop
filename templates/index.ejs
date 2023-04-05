@@ -32,7 +32,7 @@
                     <label for="select-categories" class="form-label select-sort me-3">Категория</label>
                     <select name="category" class="form-select select-sort" id="select-categories">
                       <%  for(let i = 0; i < categories.length; i++) { %>
-                        <option value=<%= categories[i].title %>><%= categories[i].title %></option>
+                        <option value="<%= categories[i].title %>"><%= categories[i].title %></option>
                       <% } %>
                       <option value="" selected="true">Все</option>
                     </select>
@@ -53,7 +53,7 @@
                     <% for(let i = 0; i < companies.length; i++) { %>
                       <div class="col-md-2">
                         <div class="form-check">
-                          <input name="companies[]" value=<%= companies[i].title %> class="form-check-input" type="checkbox" id=<%= companies[i].title %>>
+                          <input name="companies[]" value="<%= companies[i].title %>" class="form-check-input" type="checkbox" id=<%= companies[i].title %>>
                           <label class="form-check-label" for=<%= companies[i].title %>><%= companies[i].title %></label> 
                         </div>
                       </div>
