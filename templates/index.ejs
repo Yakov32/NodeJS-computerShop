@@ -22,11 +22,11 @@
                   </div>
                   <div class="col-md-3">
                     <label for="inputPriceFrom" class="form-label">Цена от</label>
-                    <input name="priceFrom" type="number" name="priceFrom" class="form-control" id="inputPriceFrom">
+                    <input name="priceFrom" type="text" name="priceFrom" class="form-control" id="inputPriceFrom">
                   </div>
                   <div class="col-md-3">
                     <label for="inputPriceTo" class="form-label">Цена до</label>
-                    <input name="priceTo" type="number" class="form-control" id="inputPriceTo">
+                    <input name="priceTo" type="text" class="form-control" id="inputPriceTo">
                   </div>
                   <div class="col-md-3">
                     <label for="select-categories" class="form-label select-sort me-3">Категория</label>
@@ -35,6 +35,7 @@
                         <option value="<%= categories[i].title %>"><%= categories[i].title %></option>
                       <% } %>
                       <option value="" selected="true">Все</option>
+                      <option value="Приводы">Не сущ.категория(тест)</option>
                     </select>
                   </div>
                   <div class="col-md-3">
@@ -46,8 +47,7 @@
                     </select>
                   </div>
                   <div class="col-md-12">
-                    <h3 class="form-label">По каким компаниям искать</h3>
-                    
+                    <h3 class="form-label">По каким компаниям искать</h3>   
                   </div>
                   
                     <% for(let i = 0; i < companies.length; i++) { %>
@@ -58,6 +58,12 @@
                         </div>
                       </div>
                     <% } %>
+                    <div class="col-md-2">
+                      <div class="form-check">
+                        <input name="companies[]" value="Davdav35" class="form-check-input" type="checkbox" id="Davdav35">
+                        <label class="form-check-label" for="Davdav35">Не сущ.компания(тест)</label> 
+                      </div>
+                    </div>
                 
 
                   <div class="col-md-12 text-center">

@@ -8,35 +8,11 @@ const { Op } = require('sequelize');
 const moment = require('moment');moment.locale('ru');
 
 exports.index = async function(req, res) {
-
     try {
-        
-        console.log('REQ USER -----, ', req.user);
         console.log('REQ query ----------  ', req.query);
-        console.log('tooo number -------', typeof +req.query.priceFrom);
+        let [sortField, sortType] = req.query.sort.split('-');
 
-        let sortField = 'price';
-        let sortType = 'ASC';
-
-        if(req.query.sort) {
-            let sort = req.query.sort.split('-');
-            sortField = sort[0];
-            sortType  = sort[1];
-            console.log('SORT FIELD : ', sortField, 'SORT TYPE : ', sortType);
-        }
-        
-        // console.log('sort ----- ', sort);
-
-        const categories = await Category.findAll();
-        const companies  = await Company.findAll({
-            raw: true
-        });
-
-        const companiesTitles = companies.map(item => item.title);
-        
-    
         let items = await Item.findAll({
-            //attributes: ['title', 'price'],
             include: [ {model: Category, as: 'category'}, {model: Company, as: 'company'}, {model: Like, as: 'likes'}],
             where: {
                 [Op.and] : [
@@ -44,11 +20,11 @@ exports.index = async function(req, res) {
                         [Op.or] : [
                             {
                                 title: {
-                                    [Op.iLike] : req.query.search ? '%'+req.query.search+'%' : '%'+ '' +'%',
+                                    [Op.iLike] : `%${req.query.search}%`,
                             }},
                             {
                                 description: {
-                                    [Op.iLike] : req.query.search ? '%'+req.query.search+'%' : '',
+                                    [Op.iLike] : `%${req.query.search}%`,
                                 }
                             },
                         ]
@@ -56,18 +32,18 @@ exports.index = async function(req, res) {
                     {
                         price: {
                             [Op.and] : [
-                                {[Op.lte] : +req.query.priceTo ? +req.query.priceTo : 1000000000},
-                                {[Op.gte] : +req.query.priceFrom ? +req.query.priceFrom : 0},
+                                {[Op.lte] : req.query.priceTo},
+                                {[Op.gte] : req.query.priceFrom},
                             ]
                     }},
                     {
                         '$category.title$' : {
-                            [Op.substring] : req.query.category ? req.query.category : ''
+                            [Op.substring] : req.query.category
                         }
                     },
                     {
                         '$company.title$' : {
-                            [Op.in] : req.query.companies ? req.query.companies : companiesTitles
+                            [Op.in] : req.query.companies
                         }
                     },
 
@@ -83,10 +59,14 @@ exports.index = async function(req, res) {
         alerts = alerts.concat(req.flash('error'));
         alerts = alerts.concat(req.flash('success'));
 
-        res.render('index', {items, categories, companies, user: req.user, moment, alerts});
+        const categories = await Category.findAll({raw: true});
+        const companies  = await Company.findAll({raw: true});
+
+        return res.render('index', {items, categories, companies, user: req.user, moment, alerts});
         
     } catch (error) {
         console.log('SEARCH CONTROLLER ERROR ------ ', error);
-        res.send(`SEARCH CONTROLLER ERROR ------ ' ${error}`);
+        req.flash('error', `Ошибка поиска ---- ${error.message}`)
+        res.redirect('/');
     }
 }
