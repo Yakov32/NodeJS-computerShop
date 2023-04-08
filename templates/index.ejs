@@ -11,79 +11,78 @@
             
             <nav class="navbar navbar-dark bg-light border-dark border-bottom border-top rounded">
               <div class="container-fluid">
-                <form class="row g-3" action="/" method="get">
-                  <div class="col-md-11">
-                    <label for="inputSearch" class="form-label">Поиск</label>
-                    <input name="search" type="search" class="form-control" id="inputSearch">
-                  </div>
-                  <div class="col-md-1">
-                    <span class="input-group-text fa fa-search fa-2x mt-4 " id="search-addon">
-                    </span>
-                  </div>
-                  <div class="col-md-3">
-                    <label for="inputPriceFrom" class="form-label">Цена от</label>
-                    <input name="priceFrom" type="text" name="priceFrom" class="form-control" id="inputPriceFrom">
-                  </div>
-                  <div class="col-md-3">
-                    <label for="inputPriceTo" class="form-label">Цена до</label>
-                    <input name="priceTo" type="text" class="form-control" id="inputPriceTo">
-                  </div>
-                  <div class="col-md-3">
-                    <label for="select-categories" class="form-label select-sort me-3">Категория</label>
-                    <select name="category" class="form-select select-sort" id="select-categories">
-                      <%  for(let i = 0; i < categories.length; i++) { %>
-                        <option value="<%= categories[i].title %>"><%= categories[i].title %></option>
+                <form  action="/" method="get">
+                  <div class="row g-3">
+                    <div class="col-md-11">
+                      <label for="inputSearch" class="form-label">Поиск</label>
+                      <input name="search" type="search" value="<%=previousQuery.search%>" class="form-control" id="inputSearch">
+                    </div>
+                    <div class="col-md-1">
+                      <span class="input-group-text fa fa-search fa-2x mt-4 " id="search-addon">
+                      </span>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="inputPriceFrom" class="form-label">Цена от</label>
+                      <input name="priceFrom" placeholder="<%=previousQuery.priceFrom%>" type="text" value="<%=previousQuery.priceFrom ? previousQuery.priceFrom : ''%>" name="priceFrom" class="form-control" id="inputPriceFrom">
+                    </div>
+                    <div class="col-md-3">
+                      <label for="inputPriceTo" class="form-label">Цена до</label>
+                      <input name="priceTo" placeholder="<%=previousQuery.priceTo%>" type="text" value="<%=previousQuery.priceTo !== 100000000 ? previousQuery.priceTo : ''%>" class="form-control" id="inputPriceTo">
+                    </div>
+                    <div class="col-md-3">
+                      <label for="select-categories" class="form-label select-sort me-3">Категория</label>
+                      <select name="category" class="form-select select-sort" id="select-categories">
+                        <option value="" selected>Все</option>
+                        <%  for(let i = 0; i < categories.length; i++) { %>
+                          <option value="<%= categories[i].title %>" <%= categories[i].title === previousQuery.category ? "selected" : ""%>><%= categories[i].title %></option>
+                        <% } %>
+                        <option value="Приводы">Не сущ.категория(тест)</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="select-sort" class="form-label me-3">Сортировка по</label>
+                      <select name="sort" class="form-select" id="select-sort">
+                        <option value="price-ASC" <%=previousQuery.sort === "price-ASC" ? "selected" : ""%>>Сначала дешёвые</option>
+                        <option value="price-DESC"<%=previousQuery.sort === "price-DESC" ? "selected" : ""%>>Сначала дорогие</option>
+                        <option value="createdAt-DESC"<%=previousQuery.sort === "createdAt-DESC" ? "selected" : ""%>>По дате</option>
+                      </select>
+                    </div>
+                    <div class="col-md-12">
+                      <h3 class="form-label">По каким компаниям искать</h3>   
+                    </div>
+                    
+                      <% for(let i = 0; i < companies.length; i++) { %>
+                        <div class="col-md-2">
+                          <div class="form-check">
+                            <input name="companies[]" <%= companies.length !== previousQuery.companies.length && previousQuery.companies.includes(companies[i].title) ? "checked" : ""%> value="<%= companies[i].title %>" class="form-check-input" type="checkbox" id=<%= companies[i].title %>>
+                            <label class="form-check-label" for=<%= companies[i].title %>><%= companies[i].title %></label> 
+                          </div>
+                        </div>
                       <% } %>
-                      <option value="" selected="true">Все</option>
-                      <option value="Приводы">Не сущ.категория(тест)</option>
-                    </select>
-                  </div>
-                  <div class="col-md-3">
-                    <label for="select-sort" class="form-label me-3">Сортировка по</label>
-                    <select name="sort" class="form-select" id="select-sort">
-                      <option value="price-ASC">Сначала дешёвые</option>
-                      <option value="price-DESC">Сначала дорогие</option>
-                      <option value="createdAt-DESC">По дате</option>
-                    </select>
-                  </div>
-                  <div class="col-md-12">
-                    <h3 class="form-label">По каким компаниям искать</h3>   
-                  </div>
-                  
-                    <% for(let i = 0; i < companies.length; i++) { %>
                       <div class="col-md-2">
                         <div class="form-check">
-                          <input name="companies[]" value="<%= companies[i].title %>" class="form-check-input" type="checkbox" id=<%= companies[i].title %>>
-                          <label class="form-check-label" for=<%= companies[i].title %>><%= companies[i].title %></label> 
+                          <input name="companies[]" value="Davdav35" class="form-check-input" type="checkbox" id="Davdav35">
+                          <label class="form-check-label" for="Davdav35">Не сущ.компания(тест)</label> 
                         </div>
                       </div>
-                    <% } %>
-                    <div class="col-md-2">
-                      <div class="form-check">
-                        <input name="companies[]" value="Davdav35" class="form-check-input" type="checkbox" id="Davdav35">
-                        <label class="form-check-label" for="Davdav35">Не сущ.компания(тест)</label> 
-                      </div>
+                  </div>
+                  <div class="row g-1">
+                    <div class="col-md-11 text-center">
+                      <button type="submit" class="btn btn-outline-secondary px-4 btn-dark text-light">Запрос</button>
                     </div>
-                
-
-                  <div class="col-md-12 text-center">
-                    <button type="submit" class="btn btn-outline-secondary px-4 btn-dark text-light">Запрос</button>
+                    <div class="col-md-1 text-center">
+                      <a href="/" class="btn btn-outline-secondary px-1 btn-secondary px-3 text-light">Сбросить</a>
                   </div>
                 </form>
               </div>
-            </nav>
-            
+            </nav>  
           </div>
-          
-          
           <!--CONTENT-->
           <div class="row">
             <div class="col-sm-12">
               <h2 class="text-center border-bottom bg-light mt-3">Товары: <%= items.length %></h2>
             </div>
           </div>
-          
-
           <div class="row">
             <% for (let i = 0; i < items.length; i++) {%>
               <div class="col-sm-4 mt-3">

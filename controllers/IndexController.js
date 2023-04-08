@@ -9,7 +9,6 @@ const moment = require('moment');moment.locale('ru');
 
 exports.index = async function(req, res) {
     try {
-        console.log('REQ query ----------  ', req.query);
         let [sortField, sortType] = req.query.sort.split('-');
 
         let items = await Item.findAll({
@@ -46,13 +45,11 @@ exports.index = async function(req, res) {
                             [Op.in] : req.query.companies
                         }
                     },
-
                 ],    
             },
             order: [
                 [sortField, sortType]
             ],
-            //limit: 30 
         });
         
         let alerts = [];
@@ -62,7 +59,7 @@ exports.index = async function(req, res) {
         const categories = await Category.findAll({raw: true});
         const companies  = await Company.findAll({raw: true});
 
-        return res.render('index', {items, categories, companies, user: req.user, moment, alerts});
+        return res.render('index', {items, categories, companies, user: req.user, moment, alerts, previousQuery: req.query});
         
     } catch (error) {
         console.log('SEARCH CONTROLLER ERROR ------ ', error);
