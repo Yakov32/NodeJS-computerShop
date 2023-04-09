@@ -22,7 +22,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Comment.init({
-    text: DataTypes.TEXT
+    text: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        len: [3, 150]
+      }
+    }
   }, {
     sequelize,
     modelName: 'Comment',

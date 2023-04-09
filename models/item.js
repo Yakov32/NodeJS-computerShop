@@ -34,7 +34,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        
+        len: {
+          args: [6, 150],
+          msg: 'Длина названия должна быть >= 6 и <= 150'
+        }
       }
     },
     price: {
