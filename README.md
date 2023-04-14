@@ -17,7 +17,7 @@ make start
 make init_db
 ```
 ___
-## О проэкте
+## О проекте
 
 + Аунтификация и авторизация с использованием `PassportJS`
 + БД - `Postgres` ORM - `sequelize`, `sequelize-cli`
