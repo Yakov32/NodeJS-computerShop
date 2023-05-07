@@ -7,56 +7,55 @@ const Item = require('../../models').Item;
 const Category = require('../../models').Category;
 const Company  = require('../../models').Company;
 
-module.exports =  () => {
-    return [
-        query('search').customSanitizer(value => {
-            if(!value) {
-                return '';
-            }
-            return value;
-        }),
+module.exports =   {
 
-        query('priceFrom').toInt().customSanitizer(priceFrom => {
-            if(!priceFrom || isNaN(priceFrom)) {
-                return 0;
-            }
-            return priceFrom;
-        }),
+    search: query('search').customSanitizer(value => {
+        if(!value) {
+            return '';
+        }
+        return value;
+    }),
 
-        query('priceTo').toInt().customSanitizer(priceTo => {
-            if(!priceTo || isNaN(priceTo)) {
-                return 100000000;
-            }
-            return priceTo;
-        }),
+    priceFrom: query('priceFrom').toInt().customSanitizer(priceFrom => {
+        if(!priceFrom || isNaN(priceFrom)) {
+            return 0;
+        }
+        return priceFrom;
+    }),
 
-        query('category').customSanitizer(async category => {
-            if(!category || (typeof category !== 'string')) {
-                return '';
-            }
-            const res = await inCategoriesCheck(category);
-            return res ? category : '';
-        }),
+    priceTo: query('priceTo').toInt().customSanitizer(priceTo => {
+        if(!priceTo || isNaN(priceTo)) {
+            return 100000000;
+        }
+        return priceTo;
+    }),
 
-        query('companies').customSanitizer(async companies => {
-            if(!companies || !Array.isArray(companies) || companies.length == 0 || !companiesElementsAreStrings(companies)) {
-                return getCompaniesTitles();
-            }
-            const res = await companiesCheck(companies);
-            return res ?  companies : await getCompaniesTitles();
-        }),
+    category: query('category').customSanitizer(async category => {
+        if(!category || (typeof category !== 'string')) {
+            return '';
+        }
+        const res = await inCategoriesCheck(category);
+        return res ? category : '';
+    }),
 
-        query('sort').customSanitizer(sort => {
-            if(!sort || typeof sort !== 'string') {
-                return 'price-ASC';
-            }
-            const sortArr = sort.split('-');
-            if((!sortArr[0] || !sortArr[1]) || (typeof sortArr[0] !== 'string' || typeof sortArr[1] !== 'string')) {
-                return 'price-ASC';
-            }
-            return sort;
-        }), 
-    ]
+    companies: query('companies').customSanitizer(async companies => {
+        if(!companies || !Array.isArray(companies) || companies.length == 0 || !companiesElementsAreStrings(companies)) {
+            return getCompaniesTitles();
+        }
+        const res = await companiesCheck(companies);
+        return res ?  companies : await getCompaniesTitles();
+    }),
+
+    sort: query('sort').customSanitizer(sort => {
+        if(!sort || typeof sort !== 'string') {
+            return 'price-ASC';
+        }
+        const sortArr = sort.split('-');
+        if((!sortArr[0] || !sortArr[1]) || (typeof sortArr[0] !== 'string' || typeof sortArr[1] !== 'string')) {
+            return 'price-ASC';
+        }
+        return sort;
+    }), 
 }
 
 async function inCategoriesCheck(category) {

@@ -8,10 +8,10 @@ const commentRouter = require('./commentRoute');
 const likeRouter = require('./likeRouter');
 const {checkUser, alreadyAuthorized} = require('./../middleware/authorization');
 
-const sanitizers = require('./../validators/search/sanitizers');
+const {search, priceFrom, priceTo, category, companies, sort} = require('./../validators/search/sanitizers');
 const {index} = require('./../controllers/IndexController');
 
-router.get('/', checkUser, sanitizers(), index);
+router.get('/', checkUser, [search, priceFrom, priceTo, category, companies, sort], index);
 
 router.use('/items', checkUser, itemRouter);
 router.use('/regist', alreadyAuthorized, registRouter);
