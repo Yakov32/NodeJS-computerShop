@@ -1,8 +1,11 @@
 'use strict';
 
+
 const {expect} = require('chai');
-const {body, validationResult} = require('express-validator');
-const sanitizers = require('./../validators/search/sanitizers')
+const Category = require('./../models').Category;
+const Company = require('./../models').Company;
+const sanitizers = require('./../validators/search/sanitizers');
+const sinon = require('sinon');
 
 describe('Search sanitizers', function () {
 
@@ -32,7 +35,7 @@ describe('Search sanitizers', function () {
         }
     }) 
 
-    it('should change search string if it is falsy value', function (done) {
+    it('should set to search string if it is falsy value', function (done) {
         
         req.query.search = undefined;
         sanitizers.search(req, {}, () => {
@@ -92,7 +95,106 @@ describe('Search sanitizers', function () {
         })
     });
 
-    it('should return companies')
+    //Categories tests
+    it('should not change req.query.category if that category is in the database', function (done) {
 
-    it('should return right category')
+        req.query.category = 'Видеокарты';
+        const fakeCategories = sinon.fake.resolves([{title: 'Видеокарты'}, {title: 'Процессоры'}, {title: 'Мониторы'}]);
+        sinon.replace(Category, "findAll", fakeCategories);
+        sanitizers.category(req, {}, () => {
+            try {
+                expect(req.query.category).to.equal('Видеокарты');
+                done();
+            } catch (e) {
+                done(e);
+            } finally {
+                sinon.restore();
+            }
+            
+        })
+        
+    })
+
+    it('should set req.query.category an empty string if that is not in the database', function (done) {
+
+        req.query.category = 'Оперативная память';
+        const fakeCategories = sinon.fake.resolves([{title: 'Видеокарты'}, {title: 'Процессоры'}, {title: 'Мониторы'}]);
+        sinon.replace(Category, "findAll", fakeCategories);
+        sanitizers.category(req, {}, () => {
+            try {
+                expect(req.query.category).to.equal('');
+                done();
+            } catch (e) {
+                done(e);
+            } finally {
+                sinon.restore();
+            }
+            
+        })
+        
+    })
+
+    it('should set req.query.category an empty string if that is not a string', function (done) {
+        req.query.category = 231;
+        sanitizers.category(req, {}, () => {
+            try {
+                expect(req.query.category).to.equal('');
+                done();
+            } catch (e) {
+                done(e);
+            }
+        })
+    })
+
+    //Companies tests
+    it('should not change req.query.companies if every company in given arr is in the database', function (done) {
+        
+        req.query.companies = ['NVidia', 'AMD'];
+        const fakeCompanies = sinon.fake.resolves([{title: 'NVidia'}, {title: 'AMD'}, {title: 'Intel'}]);
+        sinon.replace(Company, 'findAll', fakeCompanies);
+        sanitizers.companies(req, {}, () => {
+            try {
+                expect(req.query.companies).to.deep.equal(['NVidia', 'AMD']);
+                done();
+            } catch (e) {
+                done(e);
+            } finally {
+                sinon.restore();
+            }
+        })
+    })
+
+    it('should set to req.query.companies all companies from database if at least one company in given arr is does not exist', function (done) {
+        
+        req.query.companies = ['NVidia', 'AMD', 'Buasda31231'];
+        const fakeCompanies = sinon.fake.resolves([{title: 'NVidia'}, {title: 'AMD'}, {title: 'Intel'}]);
+        sinon.replace(Company, 'findAll', fakeCompanies);
+        sanitizers.companies(req, {}, () => {
+            try {
+                expect(req.query.companies).to.deep.equal(['NVidia', 'AMD', 'Intel']);
+                done();
+            } catch (e) {
+                done(e);
+            } finally {
+                sinon.restore();
+            }
+        })
+    })
+
+    it('should set to req.query.companies all companies from the database if that is not array or empty array', function (done) {
+        
+        req.query.companies = 'asdasdad';
+        const fakeCompanies = sinon.fake.resolves([{title: 'NVidia'}, {title: 'AMD'}, {title: 'Intel'}]);
+        sinon.replace(Company, 'findAll', fakeCompanies);
+        sanitizers.companies(req, {}, () => {
+            try {
+                expect(req.query.companies).to.deep.equal(['NVidia', 'AMD', 'Intel']);
+                done();
+            } catch (e) {
+                done(e);
+            } finally {
+                sinon.restore();
+            }
+        })
+    })
 })
