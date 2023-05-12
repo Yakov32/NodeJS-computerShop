@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const {item, itemCreate, itemCreateForm} = require('./../controllers/itemController');
 
-const rules = require('./../validators/item/rules');
+const {itemName, itemPrice, itemCategory, itemCompany} = require('./../validators/item/rules');
 const errorHandler = require('../validators/item/errorHandler');
 const {validate} = require('./../validators');
 const multer = require('multer');
@@ -42,6 +42,6 @@ router.get('/get/:id', item);
 
 router.get('/create', checkAdmin, itemCreateForm);
 
-router.post('/create', checkAdmin, uploadOptions.single('image'), [rules(), validate, errorHandler], itemCreate);
+router.post('/create', checkAdmin, uploadOptions.single('image'), [[itemName, itemPrice, itemCategory, itemCompany], validate, errorHandler], itemCreate);
 
 module.exports = router;
