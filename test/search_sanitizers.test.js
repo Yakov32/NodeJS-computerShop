@@ -35,7 +35,7 @@ describe('Search sanitizers', function () {
         }
     }) 
 
-    it('should change req.query.search to "" if it is not a string', function (done) {
+    it('should change search string to "" if it is not a string', function (done) {
         
         req.query.search = undefined;
         sanitizers.search(req, {}, () => {
@@ -71,7 +71,7 @@ describe('Search sanitizers', function () {
         })
     });
 
-    it('should change req.query.sort to default sort string if it is a not string', function (done) {
+    it('should change sort field to default sort string if it is a not string', function (done) {
         req.query.sort = 512;
         sanitizers.sort(req, {}, () => {
             try {
@@ -83,7 +83,7 @@ describe('Search sanitizers', function () {
         })
     });
 
-    it('should change req.query.sort to default sort string if it is an invalid string', function (done) {
+    it('should change sort field to default sort string if it is an invalid string', function (done) {
         req.query.sort = 'asdasdasdasdaaboba';
         sanitizers.sort(req, {}, () => {
             try {
@@ -96,7 +96,7 @@ describe('Search sanitizers', function () {
     });
 
     //Categories tests
-    it('should not change req.query.category if that category is in the database', function (done) {
+    it('should not change the category if that is in the database', function (done) {
 
         req.query.category = 'Видеокарты';
         const fakeCategories = sinon.fake.resolves([{title: 'Видеокарты'}, {title: 'Процессоры'}, {title: 'Мониторы'}]);
@@ -115,7 +115,7 @@ describe('Search sanitizers', function () {
         
     })
 
-    it('should set req.query.category an empty string if that is not in the database', function (done) {
+    it('should change the category to empty string if that is not in the database', function (done) {
 
         req.query.category = 'Оперативная память';
         const fakeCategories = sinon.fake.resolves([{title: 'Видеокарты'}, {title: 'Процессоры'}, {title: 'Мониторы'}]);
@@ -134,7 +134,7 @@ describe('Search sanitizers', function () {
         
     })
 
-    it('should set req.query.category an empty string if that is not a string', function (done) {
+    it('should change category to an empty string if that is not a string', function (done) {
         req.query.category = 231;
         sanitizers.category(req, {}, () => {
             try {
@@ -147,7 +147,7 @@ describe('Search sanitizers', function () {
     })
 
     //Companies tests
-    it('should not change req.query.companies if every company in given arr is in the database', function (done) {
+    it('should not change the companies if every company in given arr is in the database', function (done) {
         
         req.query.companies = ['NVidia', 'AMD'];
         const fakeCompanies = sinon.fake.resolves([{title: 'NVidia'}, {title: 'AMD'}, {title: 'Intel'}]);
@@ -164,7 +164,7 @@ describe('Search sanitizers', function () {
         })
     })
 
-    it('should set to req.query.companies all companies from database if at least one company in given arr is does not exist', function (done) {
+    it('should set the companies to all companies from database if at least one company in given arr is does not exist in the database', function (done) {
         
         req.query.companies = ['NVidia', 'AMD', 'Buasda31231'];
         const fakeCompanies = sinon.fake.resolves([{title: 'NVidia'}, {title: 'AMD'}, {title: 'Intel'}]);
@@ -181,7 +181,7 @@ describe('Search sanitizers', function () {
         })
     })
 
-    it('should set to req.query.companies all companies from the database if that is not array or empty array', function (done) {
+    it('should change the companies to all companies from the database if that is not array or empty array', function (done) {
         
         req.query.companies = 'asdasdad';
         const fakeCompanies = sinon.fake.resolves([{title: 'NVidia'}, {title: 'AMD'}, {title: 'Intel'}]);

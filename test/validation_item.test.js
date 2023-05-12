@@ -21,7 +21,7 @@ describe('Validation of create item', function () {
     }) 
 
     //Item name
-    it('should not change itemName if that is a correct string', function (done) {
+    it('should return no error if the name is a correct string', function (done) {
 
         req.body.itemName = 'NVidia 3060 ti';
 
@@ -42,7 +42,7 @@ describe('Validation of create item', function () {
         })
     });
     
-    it('should return an error if itemName already in use', function (done) {
+    it('should return an error if the name is already in use', function (done) {
 
         req.body.itemName = 'NVidia 3060 ti';
 
@@ -68,7 +68,7 @@ describe('Validation of create item', function () {
         })
     });
 
-    it('should return an error if itemName is not a string', function (done) {
+    it('should return an error if the name is not a string', function (done) {
 
         req.body.itemName = [2,5,8];
 
@@ -93,7 +93,7 @@ describe('Validation of create item', function () {
         })
     });  
 
-    it('should return an error if itemName incorrect length', function (done) {
+    it('should return an error if the name has incorrect length', function (done) {
 
         req.body.itemName = 'NVi';
 
@@ -119,7 +119,7 @@ describe('Validation of create item', function () {
     });
 
     //Item price
-    it('should return no error if itemPrice is a number with correct length', function (done) {
+    it('should return no error if price is a number with correct length', function (done) {
 
         req.body.itemPrice = 450;
 
@@ -134,7 +134,7 @@ describe('Validation of create item', function () {
         })
     });
 
-    it('should return an error if itemPrice not a number', function (done) {
+    it('should return an error if price not a number', function (done) {
 
         req.body.itemPrice = 'kdasdsad';
 
@@ -154,7 +154,7 @@ describe('Validation of create item', function () {
         })
     });
 
-    it('should return an error if itemPrice is a number with incorrect length', function (done) {
+    it('should return an error if the price is a number with incorrect length', function (done) {
 
         req.body.itemPrice = 7;
 
@@ -176,7 +176,7 @@ describe('Validation of create item', function () {
     
     //Item category
 
-    it('should return no error if req.body.category exists in the database', function(done) {
+    it('should return no error if the category exists in the database', function(done) {
         req.body.category = 'Процессоры';
 
         const fakeGetCategory = sinon.fake.resolves({id: 2, title: 'Процессоры'});
@@ -195,7 +195,7 @@ describe('Validation of create item', function () {
         })
     });
 
-    it('should return an error if req.body.category is empty', function (done) {
+    it('should return an error if the category is empty', function (done) {
 
         req.body.category = '';
 
@@ -215,7 +215,7 @@ describe('Validation of create item', function () {
         })
     });
 
-    it('should return an error if req.body.category does not exist in the database', function (done) {
+    it('should return an error if the category does not exist in the database', function (done) {
 
         req.body.category = 'Мышки';
 
@@ -242,7 +242,7 @@ describe('Validation of create item', function () {
 
     //Item company
 
-    it('should return no error if req.body.company exists in the database', function (done) {
+    it('should return no error if given company exists in the database', function (done) {
 
         req.body.company = 'Nvidia';
 
@@ -262,7 +262,7 @@ describe('Validation of create item', function () {
         })
     });
 
-    it('should return an error if req.body.company is empty', function (done) {
+    it('should return an error if given company field is empty', function (done) {
 
         req.body.company = '';
 
@@ -287,7 +287,7 @@ describe('Validation of create item', function () {
         })
     });
 
-    it('should return an error if req.body.company does not exist in the database', function (done) {
+    it('should return an error if given company does not exist in the database', function (done) {
 
         req.body.company = 'PunNum';
 
