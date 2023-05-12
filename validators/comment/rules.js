@@ -20,7 +20,7 @@ module.exports =  {
                 } catch (error) {
                     return Promise.reject();
                 }
-            }).withMessage('Ошибка. Что-то не так с отправителем комментария'),
+            }).withMessage('Ошибка. Отправитель комментария не зарегестрирован.'),
 
         'commentItem': body('commentItemId').notEmpty().withMessage('Ошибка. Обьект комментария не получен')
             .custom(async function(itemId) {
@@ -33,5 +33,5 @@ module.exports =  {
                 } catch (error) {
                    return Promise.reject();
                 }
-            }).withMessage('Ошибка. Что-то не так с обьектом комментирования')
+            }).withMessage('Ошибка. Товар комментария не существует в базе данных')
 };
