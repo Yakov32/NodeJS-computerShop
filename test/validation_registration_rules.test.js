@@ -17,7 +17,7 @@ describe('Validation of registration', function () {
             req = { body: {email: '', user_password: ''} }
     }) 
     
-    it('should return no errors for valid email', function (done) {
+    it('should return no error for valid email', function (done) {
         req.body.user_email = 'yasha@gmail.com';
 
         rules.email(req, {}, () => {

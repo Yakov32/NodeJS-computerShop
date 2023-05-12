@@ -35,7 +35,7 @@ describe('Search sanitizers', function () {
         }
     }) 
 
-    it('should set to search string if it is falsy value', function (done) {
+    it('should change req.query.search to "" if it is not a string', function (done) {
         
         req.query.search = undefined;
         sanitizers.search(req, {}, () => {
@@ -44,7 +44,7 @@ describe('Search sanitizers', function () {
         })
     }); 
 
-    it('should change priceFrom if it is not number', function (done) {
+    it('should change priceFrom to 0 if given value is not a number', function (done) {
 
         req.query.priceFrom = 'asdasd';
         sanitizers.priceFrom(req, {}, () => {
@@ -58,7 +58,7 @@ describe('Search sanitizers', function () {
 
     });
 
-    it('should change priceTo if it is not number', function (done) {
+    it('should change priceTo to 10000000 if given value is not a number', function (done) {
 
         req.query.priceTo = 'sad213s';
         sanitizers.priceTo(req, {}, () => {
@@ -71,7 +71,7 @@ describe('Search sanitizers', function () {
         })
     });
 
-    it('should return default sort string if it is a not string', function (done) {
+    it('should change req.query.sort to default sort string if it is a not string', function (done) {
         req.query.sort = 512;
         sanitizers.sort(req, {}, () => {
             try {
@@ -83,7 +83,7 @@ describe('Search sanitizers', function () {
         })
     });
 
-    it('should return default sort string if it is an invalid string', function (done) {
+    it('should change req.query.sort to default sort string if it is an invalid string', function (done) {
         req.query.sort = 'asdasdasdasdaaboba';
         sanitizers.sort(req, {}, () => {
             try {

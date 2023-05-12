@@ -8,7 +8,7 @@ const {validationResult} = require('express-validator');
 const rules = require('./../validators/item/rules');
 const sinon = require('sinon');
 
-describe('Validation of item creation', function () {
+describe('Validation of create item', function () {
 
     let req = {};
 

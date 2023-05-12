@@ -4,7 +4,7 @@ const {expect} = require('chai');
 const {validationResult} = require('express-validator');
 const rules = require('./../validators/comment/rules');
 
-describe('Validation of comment', function () {
+describe('Validation of create comment', function () {
 
     let req = {};
 
@@ -30,7 +30,7 @@ describe('Validation of comment', function () {
         })
     }); 
     
-    it('should return an error for invalid commentText', function (done) {
+    it('should return an error for incorrect length of commentText', function (done) {
 
         req.body.commentText = '12';
         rules.commentText(req, {}, () => {
